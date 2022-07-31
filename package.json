@@ -1,0 +1,31 @@
+{
+  "name": "gms_snake",
+  "version": "0.0.1",
+  "description": "Introduction to game development using HTML Canvas and JavaScript",
+  "scripts": {
+    "start": "webpack-dev-server --config ./config/webpack.dev.js",
+    "build": "webpack --config ./config/webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhkrvrchko/gms_snake.git"
+  },
+  "keywords": [
+    "HTML",
+    "Canvas",
+    "JavaScript"
+  ],
+  "author": "Maksym Kryvoruchko <mhkrvrchko@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhkrvrchko/gms_snake/issues"
+  },
+  "homepage": "https://github.com/mhkrvrchko/gms_snake#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3",
+    "webpack-merge": "^5.8.0"
+  }
+}
