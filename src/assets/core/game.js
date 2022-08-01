@@ -41,7 +41,11 @@ export class Game {
 
     static setUpControls = () => {
         window.addEventListener('keydown', (e) => {
-            const pressedKeyDirection = e.key.includes('Arrow') ? e.key.replace('Arrow', '') : null;
+            const isArrowKey = e.key.includes('Arrow');
+
+            if(!isArrowKey) return;
+
+            const pressedKeyDirection = isArrowKey ? e.key.replace('Arrow', '') : null;
             
             if(
                 this.direction === 'Up' && pressedKeyDirection === 'Down' ||
