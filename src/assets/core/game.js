@@ -1,3 +1,4 @@
+import { Fruit } from "../models/fruit";
 import { Snake } from "../models/snake";
 import { Field } from "./field"
 
@@ -18,6 +19,7 @@ export class Game {
     static init = () => {
         this.field = new Field(this);
         this.snake = new Snake(this);
+        this.fruit = new Fruit(this);
 
         this.setUpControls();
 
@@ -29,6 +31,7 @@ export class Game {
 
         if(this.fpsRate % this.fpsSpeed === 0) {
             this.field.clear();
+            this.fruit.render();
             this.snake.render();
         }
         

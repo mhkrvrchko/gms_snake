@@ -6,23 +6,25 @@ export class Snake {
 
         const { field, squareLength } = this.gameState;
 
-        this.width = squareLength;
-        this.height = squareLength;
-        this.step = squareLength;
+        this.width = this.height =  this.step = squareLength;
 
         this.posX = field.width / 2;
         this.posY = field.height / 2;
     }
 
     render () {
-        const { field } = this.gameState;
+        const { field, fruit } = this.gameState;
 
         field.ctx.beginPath();
-        field.ctx.fillStyle = '#FF0000'
+        field.ctx.fillStyle = '#000000'
         field.ctx.rect(this.posX, this.posY, this.width, this.height);
         field.ctx.fill();
 
         if(!this.gameState.isGameOver) this.move();
+
+        if(this.posX === fruit.posX && this.posY === fruit.posY) {
+            this.eat();
+        }
     }
 
     move () {
@@ -53,11 +55,9 @@ export class Snake {
         }
     }
 
-    grow () {
-
-    }
-
     eat () {
-        
+        const { fruit } = this.gameState;
+
+        fruit.isFruitExist = false;
     }
 }
