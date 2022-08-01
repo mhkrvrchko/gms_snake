@@ -13,6 +13,7 @@ export class Game {
     static direction = null;
 
     static isInit = false;
+    static isGameOver = false;
 
     static init = () => {
         this.field = new Field(this);

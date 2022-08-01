@@ -22,19 +22,34 @@ export class Snake {
         field.ctx.rect(this.posX, this.posY, this.width, this.height);
         field.ctx.fill();
 
-        this.move();
+        if(!this.gameState.isGameOver) this.move();
     }
 
     move () {
-        switch(this.gameState.direction) {
-            case "Up": this.posY -= this.step;
-                       break;
-            case "Down": this.posY += this.step;
-                       break;
-            case "Left": this.posX -= this.step;
-                       break;
-            case "Right": this.posX += this.step;
-                       break;
+        this.gameState.isGameOver = this.gameState.field.isSnakeStuck(this.posX, this.posY);
+
+        if(this.gameState.isGameOver) {
+            switch(this.gameState.direction) {
+                case "Up": this.posY += this.step;
+                           break;
+                case "Down": this.posY -= this.step;
+                           break;
+                case "Left": this.posX += this.step;
+                           break;
+                case "Right": this.posX -= this.step;
+                           break;
+            }
+        } else {
+            switch(this.gameState.direction) {
+                case "Up": this.posY -= this.step;
+                           break;
+                case "Down": this.posY += this.step;
+                           break;
+                case "Left": this.posX -= this.step;
+                           break;
+                case "Right": this.posX += this.step;
+                           break;
+            }
         }
     }
 

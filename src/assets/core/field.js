@@ -14,10 +14,10 @@ export class Field {
         this.ctx.rect(0, 0, this.width, this.height);
         this.ctx.fill();
 
-        this.terrain(true);
+        this.drawTerrain(true);
     }
 
-    terrain = (enable) => {
+    drawTerrain = (enable) => {
         if(!enable) return;
 
         const { squareLength } = this.gameState;
@@ -25,10 +25,16 @@ export class Field {
         for(let i = 0; i < this.width / squareLength; i++) {
            for(let j = 0; j < this.height / squareLength; j++) {
                 this.ctx.beginPath();
-                this.ctx.fillStyle = !(i % 2) ? (!(j % 2) ? '#aaa' : '#ddd') : (!(j % 2) ? '#ddd' : '#aaa');
+                this.ctx.fillStyle = !(i % 2) ? (!(j % 2) ? '#9DC183' : '#D0F0C0') : (!(j % 2) ? '#D0F0C0' : '#9DC183');
                 this.ctx.rect(i * squareLength, j * squareLength, squareLength, squareLength);
                 this.ctx.fill();
            }
         }
+    }
+
+    isSnakeStuck = (x, y) => {
+        if(x < 0 || x >= this.width || y < 0 || y >= this.height) return true;
+
+        return false;
     }
 }
