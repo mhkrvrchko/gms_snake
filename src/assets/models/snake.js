@@ -51,7 +51,9 @@ export class Snake {
     }
 
     move () {
-        if(this.gameState.field.isSnakeStuck(this.snakeHead.posX, this.snakeHead.posY)) return this.dead();
+        if(
+            this.gameState.field.isSnakeStuck(this.snakeHead.posX, this.snakeHead.posY) 
+        ) return this.dead();
         
         this.save();
 
@@ -76,6 +78,8 @@ export class Snake {
             case "Right": this.snakeHead.posX += this.step;
                         break;
         }
+
+       if(this.snakeBody.some(partial => this.snakeHead.posX === partial.posX && this.snakeHead.posY === partial.posY)) return this.dead();
     }
 
     eat () {
@@ -90,12 +94,12 @@ export class Snake {
         fruit.isFruitExist = false;
     }
 
-    dead() {
+    dead () {
         [this.snakeHead, this.snakeBody] = this.saveState;
         this.gameState.isGameOver = true;
     }
 
-    save() {
+    save () {
         const snakeHeadCopy = Object.assign({}, this.snakeHead);
         const snakeBodyCopy = this.snakeBody.map(partial => Object.assign({}, partial));
 
