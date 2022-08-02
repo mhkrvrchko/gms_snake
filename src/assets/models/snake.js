@@ -1,5 +1,3 @@
-import { Field } from "../core/field";
-
 export class Snake {
     constructor (gameState) {
         this.gameState = gameState;
@@ -17,7 +15,7 @@ export class Snake {
         this.snakeBody = [];
     }
 
-    render () {
+    render = () => {
         const { field, fruit } = this.gameState;
 
         [this.snakeHead, ...this.snakeBody].forEach(partial => {
@@ -50,7 +48,7 @@ export class Snake {
         if(this.snakeHead.posX === fruit.posX && this.snakeHead.posY === fruit.posY) this.eat();
     }
 
-    move () {
+    move = () => {
         if(
             this.gameState.field.isSnakeStuck(this.snakeHead.posX, this.snakeHead.posY) 
         ) return this.dead();
@@ -82,8 +80,8 @@ export class Snake {
        if(this.snakeBody.some(partial => this.snakeHead.posX === partial.posX && this.snakeHead.posY === partial.posY)) return this.dead();
     }
 
-    eat () {
-        const { fruit } = this.gameState;
+    eat = () => {
+        const { fruit, increaseScoreByValue } = this.gameState;
 
         this.snakeBody.push({
             type: "BODY",
@@ -91,15 +89,17 @@ export class Snake {
             posY: fruit.posY
         });
 
+        increaseScoreByValue(10);
+
         fruit.isFruitExist = false;
     }
 
-    dead () {
+    dead = () => {
         [this.snakeHead, this.snakeBody] = this.saveState;
         this.gameState.isGameOver = true;
     }
 
-    save () {
+    save = () => {
         const snakeHeadCopy = Object.assign({}, this.snakeHead);
         const snakeBodyCopy = this.snakeBody.map(partial => Object.assign({}, partial));
 

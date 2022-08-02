@@ -4,6 +4,7 @@ import { Field } from "./field"
 
 export class Game {
     static squareLength = 20;
+    static score = 0;
 
     static fpsRate = 0;
     static fpsSpeed = 8;
@@ -39,6 +40,10 @@ export class Game {
         window.requestAnimationFrame(this.render.bind(this));
     }
 
+    static increaseScoreByValue = (value) => {
+        this.score += value;
+    }
+
     static setUpControls = () => {
         window.addEventListener('keydown', (e) => {
             const isArrowKey = e.key.includes('Arrow');
@@ -47,6 +52,8 @@ export class Game {
 
             const pressedKeyDirection = isArrowKey ? e.key.replace('Arrow', '') : null;
             
+            console.log(this.direction, pressedKeyDirection);
+
             if(
                 this.direction === 'Up' && pressedKeyDirection === 'Down' ||
                 this.direction === 'Down' && pressedKeyDirection === 'Up' || 
