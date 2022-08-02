@@ -6,11 +6,15 @@ export class Game {
     static squareLength = 20;
     static score = 0;
 
+    static mode = 'classic';
+    static pointMultiplier = [1, 2, 4, 6];
+
     static fpsRate = 0;
     static fpsSpeed = 8;
 
     static field = null;
     static snake = null;
+    static fruit = null;
 
     static direction = null;
 
@@ -52,8 +56,6 @@ export class Game {
 
             const pressedKeyDirection = isArrowKey ? e.key.replace('Arrow', '') : null;
             
-            console.log(this.direction, pressedKeyDirection);
-
             if(
                 this.direction === 'Up' && pressedKeyDirection === 'Down' ||
                 this.direction === 'Down' && pressedKeyDirection === 'Up' || 
@@ -63,5 +65,9 @@ export class Game {
 
             this.direction = pressedKeyDirection;
         });
+    }
+
+    static setFpsSpeed = (value) => {
+        this.fpsSpeed = value;
     }
 }

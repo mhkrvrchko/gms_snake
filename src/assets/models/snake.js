@@ -81,7 +81,7 @@ export class Snake {
     }
 
     eat = () => {
-        const { fruit, increaseScoreByValue } = this.gameState;
+        const { fruit, increaseScoreByValue, mode, score, fpsSpeed, setFpsSpeed, pointMultiplier } = this.gameState;
 
         this.snakeBody.push({
             type: "BODY",
@@ -89,9 +89,21 @@ export class Snake {
             posY: fruit.posY
         });
 
-        increaseScoreByValue(10);
-
         fruit.isFruitExist = false;
+
+        switch(mode) {
+            case 'speedrun':
+                increaseScoreByValue(10 * pointMultiplier[8 % fpsSpeed]);
+                if(score % 50 === 0 && fpsSpeed != 4) setFpsSpeed(fpsSpeed - 1);
+                break;
+            case 'pointboost':
+                console.log(fruit.isMistery);
+                increaseScoreByValue(fruit.isMistery ? 100 : 10);
+                break;
+            default:
+                increaseScoreByValue(10);
+        }
+        console.log(score);
     }
 
     dead = () => {
